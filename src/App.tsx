@@ -28,10 +28,17 @@ export default function App() {
         multiple: true,
         onDrop: async (acceptedFiles) => {
             if (acceptedFiles.length) {
-                setItems(acceptedFiles.map((file, idx) => Object.assign(file, {
+                let prevItems = [...items];
+                let selectedFiles = acceptedFiles.map((file, idx) => Object.assign(file, {
                     preview: URL.createObjectURL(file),
-                    id: idx
-                })));
+                    id: items.length + idx + 1
+                }));
+                setItems(prevItems.concat(selectedFiles));
+
+                // setItems(acceptedFiles.map((file, idx) => Object.assign(file, {
+                //     preview: URL.createObjectURL(file),
+                //     id: idx
+                // })));
             }
         },
     });
